@@ -2,23 +2,29 @@ import { useState, useMemo, useEffect } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import {
+  Bike, Zap, Mountain, Watch, Tent, Footprints, Dumbbell, Waves,
+  Truck, RotateCcw, ShieldCheck, Star,
+  ChevronRight, Flame, ArrowRight
+} from 'lucide-react'
 import Header from '../components/Header'
 import Filters from '../components/Filters'
 import ProductCard from '../components/ProductCard'
 import Footer from '../components/Footer'
+import { useCart } from '../lib/cart'
 
 const PER_PAGE = 24
 const TOTAL_CHUNKS = 8
 
 const CATEGORIES = [
-  { label: 'Fahrräder', akt: 'Radfahren', icon: '🚲' },
-  { label: 'E-Bikes', akt: 'E-Bike', icon: '⚡' },
-  { label: 'Gravel Bikes', akt: 'Gravel Bike', icon: '🏔️' },
-  { label: 'GPS & Uhren', akt: 'Laufen', icon: '⌚' },
-  { label: 'Outdoor', akt: 'Outdoor', icon: '⛺' },
-  { label: 'Wandern', akt: 'Wandern', icon: '🥾' },
-  { label: 'Fitness', akt: 'Fitness', icon: '💪' },
-  { label: 'Triathlon', akt: 'Triathlon', icon: '🏊' },
+  { label: 'Fahrräder', akt: 'Radfahren', Icon: Bike },
+  { label: 'E-Bikes', akt: 'E-Bike', Icon: Zap },
+  { label: 'Gravel Bikes', akt: 'Gravel Bike', Icon: Mountain },
+  { label: 'GPS & Uhren', akt: 'Laufen', Icon: Watch },
+  { label: 'Outdoor', akt: 'Outdoor', Icon: Tent },
+  { label: 'Wandern', akt: 'Wandern', Icon: Footprints },
+  { label: 'Fitness', akt: 'Fitness', Icon: Dumbbell },
+  { label: 'Triathlon', akt: 'Triathlon', Icon: Waves },
 ]
 
 const TOP_BRANDS = [
@@ -26,11 +32,11 @@ const TOP_BRANDS = [
   'Trek Bikes', 'SCOTT Bikes', 'Polar', 'Osprey'
 ]
 
-const TRUST_ICONS = [
-  { icon: '🚚', title: 'Kostenloser Versand', desc: 'Innerhalb Deutschlands' },
-  { icon: '↩️', title: '30 Tage Rückgabe', desc: 'Einfach & unkompliziert' },
-  { icon: '🔒', title: 'Sichere Zahlung', desc: 'SSL verschlüsselt' },
-  { icon: '⭐', title: 'Geprüfte Qualität', desc: 'Top Marken garantiert' },
+const TRUST_ITEMS = [
+  { Icon: Truck, title: 'Kostenloser Versand', desc: 'Innerhalb Deutschlands' },
+  { Icon: RotateCcw, title: '30 Tage Rückgabe', desc: 'Einfach & unkompliziert' },
+  { Icon: ShieldCheck, title: 'Sichere Zahlung', desc: 'SSL verschlüsselt' },
+  { Icon: Star, title: 'Geprüfte Qualität', desc: 'Top Marken garantiert' },
 ]
 
 function formatPrice(p) {
@@ -74,7 +80,6 @@ export default function Home() {
     return [...s].sort()
   }, [products])
 
-  // Товары дня — топ скидки
   const dealsOfDay = useMemo(() => {
     return [...products]
       .filter(p => p.price > 0 && p.new_price > 0)
@@ -141,21 +146,13 @@ export default function Home() {
 
       <Header onSearch={v => { setSearch(v); setShowCatalog(true) }} searchValue={search} />
 
-      {/* ===== HERO ===== */}
-      <section style={{
-        background: 'linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #1a56db 100%)',
-        padding: '80px 24px',
-        position: 'relative',
-        overflow: 'hidden'
-      }}>
-        <div style={{
-          position: 'absolute', inset: 0,
-          backgroundImage: 'radial-gradient(circle at 70% 50%, rgba(96,165,250,0.1) 0%, transparent 60%)'
-        }} />
+      {/* HERO */}
+      <section style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #1a56db 100%)', padding: '80px 24px', position: 'relative', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle at 70% 50%, rgba(96,165,250,0.1) 0%, transparent 60%)' }} />
         <div className="container" style={{ position: 'relative', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center' }}>
           <div>
-            <div style={{ display: 'inline-block', background: 'rgba(59,130,246,0.2)', border: '1px solid rgba(59,130,246,0.5)', color: '#93c5fd', padding: '5px 16px', borderRadius: 20, fontSize: 12, fontWeight: 700, letterSpacing: '1.2px', textTransform: 'uppercase', marginBottom: 24 }}>
-              ⚡ Bis zu 51% Rabatt
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'rgba(59,130,246,0.2)', border: '1px solid rgba(59,130,246,0.5)', color: '#93c5fd', padding: '5px 16px', borderRadius: 20, fontSize: 12, fontWeight: 700, letterSpacing: '1.2px', textTransform: 'uppercase', marginBottom: 24 }}>
+              <Zap size={12} /> Bis zu 51% Rabatt
             </div>
             <h1 style={{ fontSize: 'clamp(36px, 4vw, 56px)', fontWeight: 900, color: '#f8fafc', lineHeight: 1.1, marginBottom: 20, letterSpacing: '-1px' }}>
               Premium Sport &<br /><span style={{ color: '#60a5fa' }}>Outdoor Ausrüstung</span>
@@ -164,30 +161,25 @@ export default function Home() {
               Top-Marken wie CUBE, Garmin & Suunto zu unschlagbaren Preisen — mit kostenlosem Versand nach Deutschland.
             </p>
             <div style={{ display: 'flex', gap: 12 }}>
-              <button
-                onClick={() => { setShowCatalog(true); setTimeout(() => document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' }), 100) }}
-                style={{ padding: '14px 28px', background: '#1a56db', color: '#fff', border: 'none', borderRadius: 10, fontSize: 15, fontWeight: 700, cursor: 'pointer' }}
-              >
-                Jetzt shoppen →
+              <button onClick={() => { setShowCatalog(true); setTimeout(() => document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' }), 100) }}
+                style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '14px 28px', background: '#1a56db', color: '#fff', border: 'none', borderRadius: 10, fontSize: 15, fontWeight: 700, cursor: 'pointer' }}>
+                Jetzt shoppen <ArrowRight size={16} />
               </button>
-              <button
-                onClick={() => selectCategory('E-Bike')}
-                style={{ padding: '14px 28px', background: 'rgba(255,255,255,0.1)', color: '#f8fafc', border: '1px solid rgba(255,255,255,0.2)', borderRadius: 10, fontSize: 15, fontWeight: 600, cursor: 'pointer' }}
-              >
-                E-Bikes ansehen
+              <button onClick={() => selectCategory('E-Bike')}
+                style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '14px 28px', background: 'rgba(255,255,255,0.1)', color: '#f8fafc', border: '1px solid rgba(255,255,255,0.2)', borderRadius: 10, fontSize: 15, fontWeight: 600, cursor: 'pointer' }}>
+                <Zap size={16} /> E-Bikes ansehen
               </button>
             </div>
           </div>
-          {/* Stats */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
             {[
-              { num: '735+', label: 'Produkte', icon: '📦' },
-              { num: '46', label: 'Top Marken', icon: '🏆' },
-              { num: '51%', label: 'Max. Rabatt', icon: '🔥' },
-              { num: '0€', label: 'Versandkosten', icon: '🚚' },
+              { num: '735+', label: 'Produkte', Icon: Bike },
+              { num: '46', label: 'Top Marken', Icon: Star },
+              { num: '51%', label: 'Max. Rabatt', Icon: Flame },
+              { num: '0€', label: 'Versandkosten', Icon: Truck },
             ].map(s => (
               <div key={s.label} style={{ background: 'rgba(255,255,255,0.07)', borderRadius: 14, padding: '20px 24px', border: '1px solid rgba(255,255,255,0.1)' }}>
-                <div style={{ fontSize: 28, marginBottom: 4 }}>{s.icon}</div>
+                <s.Icon size={24} color="#60a5fa" style={{ marginBottom: 8 }} />
                 <div style={{ fontSize: 28, fontWeight: 900, color: '#60a5fa', lineHeight: 1 }}>{s.num}</div>
                 <div style={{ fontSize: 13, color: 'rgba(248,250,252,0.6)', marginTop: 4 }}>{s.label}</div>
               </div>
@@ -196,76 +188,55 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== TRUST ICONS ===== */}
+      {/* TRUST */}
       <section style={{ background: '#fff', borderBottom: '1px solid #e2e8f0' }}>
         <div className="container" style={{ padding: '20px 24px', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }}>
-          {TRUST_ICONS.map(t => (
-            <div key={t.title} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 0' }}>
-              <span style={{ fontSize: 24 }}>{t.icon}</span>
+          {TRUST_ITEMS.map(({ Icon, title, desc }) => (
+            <div key={title} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 0' }}>
+              <div style={{ width: 40, height: 40, background: '#eff6ff', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                <Icon size={20} color="#1a56db" />
+              </div>
               <div>
-                <div style={{ fontSize: 13, fontWeight: 700, color: '#0f172a' }}>{t.title}</div>
-                <div style={{ fontSize: 12, color: '#64748b' }}>{t.desc}</div>
+                <div style={{ fontSize: 13, fontWeight: 700, color: '#0f172a' }}>{title}</div>
+                <div style={{ fontSize: 12, color: '#64748b' }}>{desc}</div>
               </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* ===== CATEGORIES ===== */}
+      {/* CATEGORIES */}
       <section style={{ background: '#f8fafc', padding: '48px 24px' }}>
         <div className="container">
-          <h2 style={{ fontSize: 26, fontWeight: 800, color: '#0f172a', marginBottom: 24 }}>
-            Kategorien
-          </h2>
+          <h2 style={{ fontSize: 26, fontWeight: 800, color: '#0f172a', marginBottom: 24 }}>Kategorien</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(8, 1fr)', gap: 12 }}>
-            {CATEGORIES.map(cat => (
-              <button
-                key={cat.akt}
-                onClick={() => selectCategory(cat.akt)}
-                style={{
-                  background: activeCategory === cat.akt ? '#1a56db' : '#fff',
-                  color: activeCategory === cat.akt ? '#fff' : '#0f172a',
-                  border: `1.5px solid ${activeCategory === cat.akt ? '#1a56db' : '#e2e8f0'}`,
-                  borderRadius: 12,
-                  padding: '16px 8px',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  gap: 8,
-                  boxShadow: activeCategory === cat.akt ? '0 4px 16px rgba(26,86,219,0.25)' : 'none'
-                }}
-              >
-                <span style={{ fontSize: 28 }}>{cat.icon}</span>
-                <span style={{ fontSize: 12, fontWeight: 600, textAlign: 'center', lineHeight: 1.2 }}>{cat.label}</span>
+            {CATEGORIES.map(({ label, akt, Icon }) => (
+              <button key={akt} onClick={() => selectCategory(akt)} style={{
+                background: activeCategory === akt ? '#1a56db' : '#fff',
+                color: activeCategory === akt ? '#fff' : '#0f172a',
+                border: `1.5px solid ${activeCategory === akt ? '#1a56db' : '#e2e8f0'}`,
+                borderRadius: 12, padding: '16px 8px', cursor: 'pointer', transition: 'all 0.2s',
+                display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10,
+                boxShadow: activeCategory === akt ? '0 4px 16px rgba(26,86,219,0.25)' : 'none'
+              }}>
+                <Icon size={26} color={activeCategory === akt ? '#fff' : '#1a56db'} />
+                <span style={{ fontSize: 12, fontWeight: 600, textAlign: 'center', lineHeight: 1.2 }}>{label}</span>
               </button>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ===== TOP BRANDS ===== */}
+      {/* TOP BRANDS */}
       <section style={{ background: '#fff', padding: '48px 24px', borderTop: '1px solid #e2e8f0' }}>
         <div className="container">
           <h2 style={{ fontSize: 26, fontWeight: 800, color: '#0f172a', marginBottom: 8 }}>Top Marken</h2>
           <p style={{ color: '#64748b', fontSize: 14, marginBottom: 28 }}>Geprüfte Qualität von führenden Herstellern</p>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
             {TOP_BRANDS.map(brand => (
-              <button
-                key={brand}
+              <button key={brand}
                 onClick={() => { setFilters(f => ({ ...f, brands: [brand] })); setShowCatalog(true); setTimeout(() => document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' }), 100) }}
-                style={{
-                  padding: '10px 20px',
-                  background: '#f8fafc',
-                  border: '1.5px solid #e2e8f0',
-                  borderRadius: 24,
-                  fontSize: 14,
-                  fontWeight: 700,
-                  color: '#334155',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s'
-                }}
+                style={{ padding: '10px 20px', background: '#f8fafc', border: '1.5px solid #e2e8f0', borderRadius: 24, fontSize: 14, fontWeight: 700, color: '#334155', cursor: 'pointer', transition: 'all 0.2s' }}
                 onMouseEnter={e => { e.currentTarget.style.borderColor = '#1a56db'; e.currentTarget.style.color = '#1a56db'; e.currentTarget.style.background = '#eff6ff' }}
                 onMouseLeave={e => { e.currentTarget.style.borderColor = '#e2e8f0'; e.currentTarget.style.color = '#334155'; e.currentTarget.style.background = '#f8fafc' }}
               >
@@ -276,52 +247,46 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== DEALS OF DAY ===== */}
+      {/* DEALS */}
       {!showCatalog && dealsOfDay.length > 0 && (
         <section style={{ background: '#f8fafc', padding: '48px 24px', borderTop: '1px solid #e2e8f0' }}>
           <div className="container">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
               <div>
-                <h2 style={{ fontSize: 26, fontWeight: 800, color: '#0f172a', marginBottom: 4 }}>🔥 Angebote des Tages</h2>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4 }}>
+                  <Flame size={22} color="#ef4444" />
+                  <h2 style={{ fontSize: 26, fontWeight: 800, color: '#0f172a' }}>Angebote des Tages</h2>
+                </div>
                 <p style={{ color: '#64748b', fontSize: 14 }}>Die größten Rabatte — nur für kurze Zeit</p>
               </div>
-              <button
-                onClick={() => { setSort('discount'); setShowCatalog(true); setTimeout(() => document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' }), 100) }}
-                style={{ padding: '9px 18px', background: 'none', border: '1.5px solid #1a56db', borderRadius: 9, color: '#1a56db', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}
-              >
-                Alle Angebote →
+              <button onClick={() => { setSort('discount'); setShowCatalog(true); setTimeout(() => document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' }), 100) }}
+                style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '9px 18px', background: 'none', border: '1.5px solid #1a56db', borderRadius: 9, color: '#1a56db', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>
+                Alle Angebote <ChevronRight size={14} />
               </button>
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 16 }}>
-              {dealsOfDay.map(p => (
-                <DealCard key={p.id} product={p} />
-              ))}
+              {dealsOfDay.map(p => <DealCard key={p.id} product={p} />)}
             </div>
           </div>
         </section>
       )}
 
-      {/* ===== CATALOG ===== */}
+      {/* CATALOG */}
       <section id="catalog" style={{ background: '#f8fafc', padding: '48px 24px', borderTop: '1px solid #e2e8f0' }}>
         <div className="container">
           {!showCatalog && (
-            <div style={{ textAlign: 'center', marginBottom: 32 }}>
-              <h2 style={{ fontSize: 26, fontWeight: 800, color: '#0f172a', marginBottom: 8 }}>Alle Produkte</h2>
+            <div style={{ marginBottom: 32 }}>
+              <h2 style={{ fontSize: 26, fontWeight: 800, color: '#0f172a', marginBottom: 4 }}>Alle Produkte</h2>
               <p style={{ color: '#64748b', fontSize: 14 }}>Entdecke unser gesamtes Sortiment</p>
             </div>
           )}
-
           <div style={{ display: 'flex', gap: 36, alignItems: 'flex-start' }}>
             <div style={{ position: 'sticky', top: 80, flexShrink: 0 }}>
-              <Filters
-                brands={ALL_BRANDS}
-                aktivitaeten={ALL_AKTIVITAETEN}
-                filters={filters}
-                onChange={f => { setFilters(f); setPage(1); setShowCatalog(true) }}
-              />
+              <Filters brands={ALL_BRANDS} aktivitaeten={ALL_AKTIVITAETEN} filters={filters}
+                onChange={f => { setFilters(f); setPage(1); setShowCatalog(true) }} />
               {(filters.brands.length > 0 || filters.aktivitaeten.length > 0 || activeCategory) && (
-                <button onClick={resetToHome} style={{ width: '100%', marginTop: 12, padding: '10px', background: 'none', border: '1.5px solid #e2e8f0', borderRadius: 8, color: '#64748b', fontSize: 13, cursor: 'pointer' }}>
-                  ← Zur Startseite
+                <button onClick={resetToHome} style={{ width: '100%', marginTop: 12, padding: '10px', background: 'none', border: '1.5px solid #e2e8f0', borderRadius: 8, color: '#64748b', fontSize: 13, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+                  <RotateCcw size={13} /> Zur Startseite
                 </button>
               )}
             </div>
@@ -329,12 +294,8 @@ export default function Home() {
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
                 <div>
-                  <h3 style={{ fontSize: 20, fontWeight: 800, color: '#0f172a' }}>
-                    {activeCategory || 'Alle Produkte'}
-                  </h3>
-                  <span style={{ fontSize: 13, color: '#64748b' }}>
-                    {loading ? 'Wird geladen...' : `${filtered.length} Produkte gefunden`}
-                  </span>
+                  <h3 style={{ fontSize: 20, fontWeight: 800, color: '#0f172a' }}>{activeCategory || 'Alle Produkte'}</h3>
+                  <span style={{ fontSize: 13, color: '#64748b' }}>{loading ? 'Wird geladen...' : `${filtered.length} Produkte gefunden`}</span>
                 </div>
                 <select value={sort} onChange={e => setSort(e.target.value)} style={{ padding: '9px 14px', border: '1.5px solid #e2e8f0', borderRadius: 9, fontSize: 13, color: '#334155', outline: 'none', background: '#fff', cursor: 'pointer' }}>
                   <option value="default">Sortierung</option>
@@ -360,7 +321,7 @@ export default function Home() {
                 </div>
               ) : paginated.length === 0 ? (
                 <div style={{ textAlign: 'center', padding: '80px 0', color: '#94a3b8' }}>
-                  <div style={{ fontSize: 48, marginBottom: 12 }}>🔍</div>
+                  <Mountain size={48} color="#e2e8f0" style={{ margin: '0 auto 12px' }} />
                   <h3 style={{ fontSize: 20, color: '#334155', marginBottom: 8 }}>Keine Produkte gefunden</h3>
                   <p>Versuche andere Filter</p>
                 </div>
@@ -396,7 +357,7 @@ export default function Home() {
 }
 
 function DealCard({ product }) {
-  const { addItem } = require('../lib/cart').useCart()
+  const { addItem } = useCart()
   const discount = product.price > 0 ? Math.round((1 - product.new_price / product.price) * 100) : 0
   const fallback = `https://via.placeholder.com/300x300/eff6ff/1a56db?text=${encodeURIComponent(product.brand || '')}`
 
@@ -404,8 +365,7 @@ function DealCard({ product }) {
     <Link href={`/product/${product.id}`} style={{ textDecoration: 'none' }}>
       <div style={{ background: '#fff', borderRadius: 14, overflow: 'hidden', border: '1px solid #e2e8f0', transition: 'transform 0.2s, box-shadow 0.2s', cursor: 'pointer' }}
         onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = '0 8px 32px rgba(26,86,219,0.12)' }}
-        onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none' }}
-      >
+        onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none' }}>
         <div style={{ position: 'relative', aspectRatio: '1', background: '#f8fafc' }}>
           <img src={product.img || fallback} alt={product.name} onError={e => e.target.src = fallback}
             style={{ width: '100%', height: '100%', objectFit: 'contain', padding: 12 }} />
@@ -422,10 +382,8 @@ function DealCard({ product }) {
             <span style={{ fontSize: 18, fontWeight: 800, color: '#0f172a' }}>{formatPrice(product.new_price)}</span>
             {product.price > product.new_price && <span style={{ fontSize: 12, color: '#94a3b8', textDecoration: 'line-through' }}>{formatPrice(product.price)}</span>}
           </div>
-          <button
-            onClick={e => { e.preventDefault(); addItem(product) }}
-            style={{ width: '100%', padding: '9px', background: '#0f172a', color: '#fff', border: 'none', borderRadius: 8, fontSize: 12, fontWeight: 600, cursor: 'pointer' }}
-          >
+          <button onClick={e => { e.preventDefault(); addItem(product) }}
+            style={{ width: '100%', padding: '9px', background: '#0f172a', color: '#fff', border: 'none', borderRadius: 8, fontSize: 12, fontWeight: 600, cursor: 'pointer' }}>
             In den Warenkorb
           </button>
         </div>
