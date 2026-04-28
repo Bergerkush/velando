@@ -3,7 +3,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import {
-  Bike, Zap, Mountain, Watch, Tent, Footprints, Dumbbell, Waves, Home
+  Bike, Zap, Mountain, Watch, Tent, Footprints, Dumbbell, Waves, HomeIcon
 } from 'lucide-react'
 import {
   Truck, RotateCcw, ShieldCheck, Star, ChevronRight, Flame, ArrowRight
@@ -23,7 +23,7 @@ const CATEGORIES = [
   { label: 'Gravel Bikes', akt: 'Gravel Bike', Icon: Mountain },
   { label: 'GPS & Uhren', akt: 'Laufen', Icon: Watch },
   { label: 'Zelte', akt: 'Zelte', Icon: Tent },
-  { label: 'Outdoor', akt: 'Outdoor', Icon: Home },
+  { label: 'Outdoor', akt: 'Outdoor', Icon: HomeIcon },
   { label: 'Wandern', akt: 'Wandern', Icon: Footprints },
   { label: 'Fitness', akt: 'Fitness', Icon: Dumbbell },
   { label: 'Triathlon', akt: 'Triathlon', Icon: Waves },
