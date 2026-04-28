@@ -1,11 +1,31 @@
 import '../styles/globals.css'
 import { CartProvider } from '../lib/cart'
 import Script from 'next/script'
+import CookieBanner from '../components/CookieBanner'
 
 export default function App({ Component, pageProps }) {
   return (
     <CartProvider>
-      {/* Google Analytics */}
+      <Script id="ga-consent" strategy="beforeInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('consent', 'default', {
+            analytics_storage: 'denied',
+            ad_storage: 'denied',
+            wait_for_update: 500
+          });
+          try {
+            const consent = localStorage.getItem('cookie_consent');
+            if (consent === 'all') {
+              gtag('consent', 'update', {
+                analytics_storage: 'granted',
+                ad_storage: 'granted'
+              });
+            }
+          } catch(e) {}
+        `}
+      </Script>
       <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-BECPWQMY4D"
         strategy="afterInteractive"
@@ -19,6 +39,7 @@ export default function App({ Component, pageProps }) {
         `}
       </Script>
       <Component {...pageProps} />
+      <CookieBanner />
     </CartProvider>
   )
 }
