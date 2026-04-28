@@ -3,9 +3,10 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import {
-  Bike, Zap, Mountain, Watch, Tent, Footprints, Dumbbell, Waves,
-  Truck, RotateCcw, ShieldCheck, Star,
-  ChevronRight, Flame, ArrowRight
+  Bike, Zap, Mountain, Watch, Tent, Footprints, Dumbbell, Waves, Home
+} from 'lucide-react'
+import {
+  Truck, RotateCcw, ShieldCheck, Star, ChevronRight, Flame, ArrowRight
 } from 'lucide-react'
 import Header from '../components/Header'
 import Filters from '../components/Filters'
@@ -21,7 +22,8 @@ const CATEGORIES = [
   { label: 'E-Bikes', akt: 'E-Bike', Icon: Zap },
   { label: 'Gravel Bikes', akt: 'Gravel Bike', Icon: Mountain },
   { label: 'GPS & Uhren', akt: 'Laufen', Icon: Watch },
-  { label: 'Outdoor', akt: 'Outdoor', Icon: Tent },
+  { label: 'Zelte', akt: 'Zelte', Icon: Tent },
+  { label: 'Outdoor', akt: 'Outdoor', Icon: Home },
   { label: 'Wandern', akt: 'Wandern', Icon: Footprints },
   { label: 'Fitness', akt: 'Fitness', Icon: Dumbbell },
   { label: 'Triathlon', akt: 'Triathlon', Icon: Waves },
@@ -209,7 +211,7 @@ export default function Home() {
       <section style={{ background: '#f8fafc', padding: '48px 24px' }}>
         <div className="container">
           <h2 style={{ fontSize: 26, fontWeight: 800, color: '#0f172a', marginBottom: 24 }}>Kategorien</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(8, 1fr)', gap: 12 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(9, 1fr)', gap: 12 }}>
             {CATEGORIES.map(({ label, akt, Icon }) => (
               <button key={akt} onClick={() => selectCategory(akt)} style={{
                 background: activeCategory === akt ? '#1a56db' : '#fff',
@@ -220,7 +222,7 @@ export default function Home() {
                 boxShadow: activeCategory === akt ? '0 4px 16px rgba(26,86,219,0.25)' : 'none'
               }}>
                 <Icon size={26} color={activeCategory === akt ? '#fff' : '#1a56db'} />
-                <span style={{ fontSize: 12, fontWeight: 600, textAlign: 'center', lineHeight: 1.2 }}>{label}</span>
+                <span style={{ fontSize: 11, fontWeight: 600, textAlign: 'center', lineHeight: 1.2 }}>{label}</span>
               </button>
             ))}
           </div>
@@ -360,7 +362,6 @@ function DealCard({ product }) {
   const { addItem } = useCart()
   const discount = product.price > 0 ? Math.round((1 - product.new_price / product.price) * 100) : 0
   const fallback = `https://via.placeholder.com/300x300/eff6ff/1a56db?text=${encodeURIComponent(product.brand || '')}`
-
   return (
     <Link href={`/product/${product.id}`} style={{ textDecoration: 'none' }}>
       <div style={{ background: '#fff', borderRadius: 14, overflow: 'hidden', border: '1px solid #e2e8f0', transition: 'transform 0.2s, box-shadow 0.2s', cursor: 'pointer' }}
