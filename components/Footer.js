@@ -29,20 +29,26 @@ export default function Footer() {
             <p style={{ fontSize: 14, lineHeight: 1.7 }}>
               Premium Outdoor & Radsport Ausrüstung. Dein Partner für unvergessliche Abenteuer — zu fairen Preisen mit kostenlosem Versand.
             </p>
+            <div style={{ marginTop: 16 }}>
+              <a href="mailto:info@velando24.de" style={{ color: '#60a5fa', fontSize: 14, textDecoration: 'none' }}>
+                info@velando24.de
+              </a>
+            </div>
           </div>
 
           <FooterCol title="Shop" links={[
             { label: 'Alle Produkte', href: '/' },
-            { label: 'Radsport', href: '/?akt=Radfahren' },
+            { label: 'Fahrräder', href: '/?akt=Radfahren' },
+            { label: 'E-Bikes', href: '/?akt=E-Bike' },
+            { label: 'Zelte', href: '/?akt=Zelte' },
             { label: 'Outdoor', href: '/?akt=Outdoor' },
-            { label: 'Wandern', href: '/?akt=Wandern' },
           ]} />
 
           <FooterCol title="Service" links={[
-            { label: 'Versand & Lieferung', href: '#' },
-            { label: 'Rückgabe', href: '#' },
+            { label: 'Versand & Lieferung', href: '/versand' },
+            { label: 'Rückgabe', href: '/rueckgabe' },
             { label: 'Über uns', href: '/ueber-uns' },
-            { label: 'Kontakt', href: '#' },
+            { label: 'Kontakt', href: 'mailto:info@velando24.de' },
           ]} />
 
           <FooterCol title="Rechtliches" links={[
@@ -59,10 +65,12 @@ export default function Footer() {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          fontSize: 13
+          fontSize: 13,
+          flexWrap: 'wrap',
+          gap: 8
         }}>
-          <span>© 2024 Velando. Alle Rechte vorbehalten.</span>
-          <span>🇩🇪 Deutschland · Kostenloser Versand ab 0€</span>
+          <span>© 2026 Velando. Alle Rechte vorbehalten.</span>
+          <span>🇩🇪 Deutschland · Kostenloser Versand</span>
         </div>
       </div>
     </footer>
@@ -85,7 +93,7 @@ function FooterCol({ title, links }) {
       <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 10 }}>
         {links.map(l => (
           <li key={l.label}>
-            <Link href={l.href} style={{
+            <a href={l.href} style={{
               color: 'rgba(248,250,252,0.6)',
               fontSize: 14,
               transition: 'color 0.2s',
@@ -95,7 +103,7 @@ function FooterCol({ title, links }) {
             onMouseLeave={e => e.target.style.color = 'rgba(248,250,252,0.6)'}
             >
               {l.label}
-            </Link>
+            </a>
           </li>
         ))}
       </ul>
