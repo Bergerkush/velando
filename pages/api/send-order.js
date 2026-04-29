@@ -67,8 +67,8 @@ export default async function handler(req, res) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        from: 'Velando Shop <onboarding@resend.dev>',
-        to: ['info@velando24.de'],  // временно на Gmail пока домен не верифицирован
+        from: 'Velando Shop <noreply@velando24.de>',
+        to: ['info@velando24.de'],
         reply_to: form.email,
         subject: `🛒 Neue Bestellung von ${form.vorname} ${form.nachname} — ${fmt(total)}`,
         html
