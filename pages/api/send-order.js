@@ -27,8 +27,7 @@ export default async function handler(req, res) {
   const html = `
     <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;color:#0f172a;">
       <div style="background:linear-gradient(135deg,#0f172a,#1a56db);padding:32px;border-radius:12px 12px 0 0;text-align:center;">
-        <h1 style="color:#fff;margin:0;font-size:24px;">🛒 Neue Bestellung</h1>
-        <p style="color:rgba(255,255,255,0.7);margin:8px 0 0;">velando24.de</p>
+        <h1 style="color:#fff;margin:0;font-size:24px;">🛒 Neue Bestellung — Velando24.de</h1>
       </div>
       <div style="background:#f8fafc;padding:24px;border-radius:0 0 12px 12px;border:1px solid #e2e8f0;">
         <h2 style="font-size:14px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">Kundendaten</h2>
@@ -69,7 +68,7 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         from: 'Velando Shop <onboarding@resend.dev>',
-        to: ['info@velando24.de'],
+        to: ['afrodilleellis@gmail.com'],  // временно на Gmail пока домен не верифицирован
         reply_to: form.email,
         subject: `🛒 Neue Bestellung von ${form.vorname} ${form.nachname} — ${fmt(total)}`,
         html
@@ -86,6 +85,6 @@ export default async function handler(req, res) {
     return res.status(200).json({ success: true })
   } catch (err) {
     console.error('Send error:', err.message)
-    return res.status(500).json({ error: 'Server error', message: err.message })
+    return res.status(500).json({ error: 'Server error' })
   }
 }
