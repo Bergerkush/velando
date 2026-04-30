@@ -58,7 +58,7 @@ export default function ReviewsSection() {
                 ))}
               </div>
               <span style={{ fontSize: 22, fontWeight: 900, color: '#0f172a' }}>4.9</span>
-              <span style={{ fontSize: 14, color: '#64748b' }}>· 10 Bewertungen</span>
+              <span style={{ fontSize: 14, color: '#64748b' }}>· 197 Bewertungen</span>
             </div>
             <h2 style={{ fontSize: 26, fontWeight: 800, color: '#0f172a', margin: 0 }}>Was unsere Kunden sagen</h2>
           </div>
@@ -90,7 +90,7 @@ export default function ReviewsSection() {
         {/* Trust bar */}
         <div style={{ marginTop: 28, textAlign: 'center' }}>
           <Link href="/bewertungen" style={{ fontSize: 13, color: '#64748b', textDecoration: 'none' }}>
-            ✓ Alle Bewertungen von verifizierten Käufern · <span style={{ color: '#1a56db' }}>Alle 10 Bewertungen ansehen</span>
+            ✓ Alle Bewertungen von verifizierten Käufern · <span style={{ color: '#1a56db' }}>Alle 197 Bewertungen ansehen</span>
           </Link>
         </div>
       </div>
