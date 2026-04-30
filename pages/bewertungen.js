@@ -48,12 +48,25 @@ export default function Bewertungen() {
           {/* Rating summary */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16, marginBottom: 48 }}>
             {[
-              { num: `${avgRating}⭐`, label: 'Durchschnittsbewertung' },
+              { num: avgRating, label: 'Durchschnittsbewertung', showStars: true },
               { num: `${reviews.length}`, label: 'Bewertungen gesamt' },
               { num: `${Math.round(fiveStars/reviews.length*100)}%`, label: 'Empfehlen uns' },
             ].map(s => (
               <div key={s.label} style={{ background: '#fff', borderRadius: 14, padding: '24px', border: '1px solid #e2e8f0', textAlign: 'center' }}>
-                <div style={{ fontSize: 32, fontWeight: 900, color: '#0f172a', marginBottom: 6 }}>{s.num}</div>
+                {s.showStars ? (
+                  <div style={{ marginBottom: 6 }}>
+                    <div style={{ fontSize: 32, fontWeight: 900, color: '#0f172a' }}>{s.num}</div>
+                    <div style={{ display: 'flex', justifyContent: 'center', gap: 2, marginTop: 4 }}>
+                      {[1,2,3,4,5].map(i => (
+                        <svg key={i} width="18" height="18" viewBox="0 0 24 24" fill="#f59e0b">
+                          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <div style={{ fontSize: 32, fontWeight: 900, color: '#0f172a', marginBottom: 6 }}>{s.num}</div>
+                )}
                 <div style={{ fontSize: 13, color: '#64748b' }}>{s.label}</div>
               </div>
             ))}
