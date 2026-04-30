@@ -147,6 +147,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <AnnouncementBar />
       <Header onSearch={v => { setSearch(v); setShowCatalog(true) }} searchValue={search} />
 
       {/* HERO */}
@@ -333,7 +334,12 @@ export default function Home() {
                 </div>
               ) : (
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 18 }}>
-                  {paginated.map(p => <ProductCard key={p.id} product={p} />)}
+                  {paginated.map((p, i) => (
+                    <>
+                      <ProductCard key={p.id} product={p} />
+                      {i === 7 && <CatalogBanner key="banner" onCategory={akt => { setFilters(f => ({ ...f, aktivitaeten: [akt] })); setPage(1); setShowCatalog(true) }} />}
+                    </>
+                  ))}
                 </div>
               )}
 
@@ -407,4 +413,83 @@ function PageBtn({ children, active, disabled, onClick }) {
 
 export async function getServerSideProps() {
   return { props: {} }
+}
+
+
+function AnnouncementBar() {
+  const [visible, setVisible] = useState(true)
+  const [time, setTime] = useState({ d: 2, h: 14, m: 37, s: 22 })
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTime(t => {
+        let { d, h, m, s } = t
+        s--
+        if (s < 0) { s = 59; m-- }
+        if (m < 0) { m = 59; h-- }
+        if (h < 0) { h = 23; d-- }
+        if (d < 0) return t
+        return { d, h, m, s }
+      })
+    }, 1000)
+    return () => clearInterval(timer)
+  }, [])
+
+  if (!visible) return null
+
+  const pad = n => String(n).padStart(2, '0')
+
+  return (
+    <div style={{ background: '#0f172a', padding: '10px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+        <span style={{ background: '#1a56db', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, letterSpacing: '0.8px' }}>FRÜHJAHR SALE</span>
+        <span style={{ color: '#f8fafc', fontSize: 13 }}>Bis zu <strong style={{ color: '#60a5fa' }}>51% Rabatt</strong> auf alle Fahrräder</span>
+      </div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+        <span style={{ color: 'rgba(248,250,252,0.5)', fontSize: 12 }}>Endet in</span>
+        <div style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
+          {[pad(time.d)+'T', pad(time.h)+'H', pad(time.m)+'M', pad(time.s)+'S'].map((v, i) => (
+            <span key={i} style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+              <span style={{ background: '#1e293b', borderRadius: 4, padding: '3px 7px', color: '#60a5fa', fontSize: 13, fontWeight: 700 }}>{v}</span>
+              {i < 3 && <span style={{ color: '#475569', fontSize: 13 }}>:</span>}
+            </span>
+          ))}
+        </div>
+        <button
+          onClick={() => setVisible(false)}
+          style={{ background: 'none', border: 'none', color: 'rgba(248,250,252,0.4)', fontSize: 18, cursor: 'pointer', lineHeight: 1, marginLeft: 8 }}
+        >✕</button>
+      </div>
+    </div>
+  )
+}
+
+function CatalogBanner({ onCategory }) {
+  return (
+    <div style={{ gridColumn: '1 / -1', background: 'linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #1a56db 100%)', borderRadius: 16, padding: '28px 32px', display: 'grid', gridTemplateColumns: '1fr auto', gap: 24, alignItems: 'center', margin: '8px 0' }}>
+      <div>
+        <div style={{ display: 'inline-block', background: 'rgba(96,165,250,0.2)', border: '1px solid rgba(96,165,250,0.4)', color: '#93c5fd', fontSize: 11, fontWeight: 700, padding: '3px 10px', borderRadius: 20, marginBottom: 10, letterSpacing: '1px' }}>
+          BIKEPACKING SEASON 2026
+        </div>
+        <h3 style={{ color: '#f8fafc', fontSize: 20, fontWeight: 800, margin: '0 0 6px', lineHeight: 1.2 }}>Bereit für das nächste Abenteuer?</h3>
+        <p style={{ color: 'rgba(248,250,252,0.6)', fontSize: 13, margin: '0 0 16px' }}>Zelte, Schlafsäcke & GPS — alles für deine Tour in den Bergen</p>
+        <div style={{ display: 'flex', gap: 10 }}>
+          <button onClick={() => onCategory('Zelte')} style={{ background: '#1a56db', color: '#fff', fontSize: 13, fontWeight: 700, padding: '9px 18px', borderRadius: 8, border: 'none', cursor: 'pointer' }}>
+            Zelte entdecken →
+          </button>
+          <button onClick={() => onCategory('E-Bike')} style={{ background: 'rgba(255,255,255,0.08)', color: '#f8fafc', fontSize: 13, padding: '9px 18px', borderRadius: 8, border: '1px solid rgba(255,255,255,0.15)', cursor: 'pointer' }}>
+            E-Bikes ansehen
+          </button>
+        </div>
+      </div>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+        {[['735+','Produkte'],['51%','Max. Rabatt'],['0€','Versand'],['4.9★','Bewertung']].map(([num, label]) => (
+          <div key={label} style={{ background: 'rgba(255,255,255,0.07)', borderRadius: 10, padding: '14px', textAlign: 'center', border: '1px solid rgba(255,255,255,0.1)' }}>
+            <div style={{ fontSize: 20, fontWeight: 800, color: '#60a5fa' }}>{num}</div>
+            <div style={{ fontSize: 11, color: 'rgba(248,250,252,0.5)', marginTop: 2 }}>{label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
 }
