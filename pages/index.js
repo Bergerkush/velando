@@ -13,6 +13,7 @@ import Filters from '../components/Filters'
 import ProductCard from '../components/ProductCard'
 import Footer from '../components/Footer'
 import { useCart } from '../lib/cart'
+import ReviewsSection from '../components/ReviewsSection'
 
 const PER_PAGE = 24
 const TOTAL_CHUNKS = 8
@@ -248,6 +249,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* REVIEWS */}
+      <ReviewsSection />
 
       {/* DEALS */}
       {!showCatalog && dealsOfDay.length > 0 && (
