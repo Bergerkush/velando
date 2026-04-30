@@ -8,7 +8,8 @@ export default function App({ Component, pageProps }) {
   return (
     <CartProvider>
       <Head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="shortcut icon" href="/favicon.ico" />
         <meta name="theme-color" content="#0f172a" />
       </Head>
