@@ -1,11 +1,17 @@
 import '../styles/globals.css'
 import { CartProvider } from '../lib/cart'
 import Script from 'next/script'
+import Head from 'next/head'
 import CookieBanner from '../components/CookieBanner'
 
 export default function App({ Component, pageProps }) {
   return (
     <CartProvider>
+      <Head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <meta name="theme-color" content="#0f172a" />
+      </Head>
       <Script id="ga-consent" strategy="beforeInteractive">
         {`
           window.dataLayer = window.dataLayer || [];
