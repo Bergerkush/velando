@@ -92,6 +92,22 @@ export default function ProductPage() {
             {product.brand && <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', color: '#1a56db', marginBottom: 8 }}>{product.brand}</div>}
             <h1 style={{ fontSize: 26, fontWeight: 800, color: '#0f172a', lineHeight: 1.2, marginBottom: 20 }}>{product.name}</h1>
 
+
+            {/* Rating */}
+            <Link href="/bewertungen" style={{ textDecoration: 'none' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16, cursor: 'pointer' }}>
+                <div style={{ display: 'flex', gap: 2 }}>
+                  {[1,2,3,4,5].map(i => (
+                    <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill="#f59e0b">
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                  ))}
+                </div>
+                <span style={{ fontSize: 14, fontWeight: 700, color: '#0f172a' }}>4.9</span>
+                <span style={{ fontSize: 14, color: '#1a56db', textDecoration: 'underline' }}>197 Bewertungen</span>
+              </div>
+            </Link>
+
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, marginBottom: 6 }}>
               <span style={{ fontSize: 36, fontWeight: 900, color: '#0f172a' }}>{formatPrice(product.new_price)}</span>
               {product.price > product.new_price && <span style={{ fontSize: 20, color: '#94a3b8', textDecoration: 'line-through' }}>{formatPrice(product.price)}</span>}
