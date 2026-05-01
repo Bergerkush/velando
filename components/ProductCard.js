@@ -6,6 +6,13 @@ function formatPrice(p) {
   return new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(p)
 }
 
+// Добавляет Cloudinary трансформации: WebP, сжатие, resize
+function optimizeCloudinaryUrl(url, width = 400) {
+  if (!url || !url.includes('res.cloudinary.com')) return url
+  // Вставляем трансформации после /upload/
+  return url.replace('/upload/', `/upload/f_auto,q_auto,w_${width},c_limit/`)
+}
+
 export default function ProductCard({ product }) {
   const { addItem } = useCart()
   const [imgErr, setImgErr] = useState(false)
@@ -15,9 +22,11 @@ export default function ProductCard({ product }) {
     ? Math.round((1 - product.new_price / product.price) * 100)
     : 0
 
+  const fallback = `https://via.placeholder.com/300x300/eff6ff/1a56db?text=${encodeURIComponent(product.brand || 'Velando')}`
+
   const imgSrc = !imgErr && product.img
-    ? product.img
-    : `https://via.placeholder.com/300x300/eff6ff/1a56db?text=${encodeURIComponent(product.brand || 'Velando')}`
+    ? optimizeCloudinaryUrl(product.img, 400)
+    : fallback
 
   function handleAdd(e) {
     e.preventDefault()
@@ -58,6 +67,9 @@ export default function ProductCard({ product }) {
           <img
             src={imgSrc}
             alt={product.name}
+            loading="lazy"
+            width={400}
+            height={400}
             onError={() => setImgErr(true)}
             style={{
               width: '100%',
