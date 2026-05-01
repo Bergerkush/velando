@@ -147,13 +147,36 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+
+      <style>{`
+        @media (max-width: 768px) {
+          .categories-grid { grid-template-columns: repeat(5, 1fr) !important; gap: 8px !important; }
+          .trust-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 8px !important; }
+          .catalog-layout { flex-direction: column !important; }
+          .filters-sidebar { display: none !important; }
+          .products-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
+          .reviews-grid { grid-template-columns: 1fr !important; }
+          .hero-grid { grid-template-columns: 1fr !important; }
+          .hero-stats { display: none !important; }
+          .top-brands { flex-wrap: wrap; }
+          .deals-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
+          .announcement-timer { display: none !important; }
+          .catalog-banner-grid { grid-template-columns: 1fr !important; }
+          .catalog-banner-stats { display: none !important; }
+        }
+        @media (max-width: 480px) {
+          .categories-grid { grid-template-columns: repeat(3, 1fr) !important; }
+          .products-grid { grid-template-columns: 1fr 1fr !important; }
+          .deals-grid { grid-template-columns: 1fr 1fr !important; }
+        }
+      `}</style>
       <AnnouncementBar />
       <Header onSearch={v => { setSearch(v); setShowCatalog(true) }} searchValue={search} />
 
       {/* HERO */}
       <section style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #1a56db 100%)', padding: '80px 24px', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle at 70% 50%, rgba(96,165,250,0.1) 0%, transparent 60%)' }} />
-        <div className="container" style={{ position: 'relative', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center' }}>
+        <div className="container" className='hero-grid' style={{ position: 'relative', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center' }}>
           <div>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'rgba(59,130,246,0.2)', border: '1px solid rgba(59,130,246,0.5)', color: '#93c5fd', padding: '5px 16px', borderRadius: 20, fontSize: 12, fontWeight: 700, letterSpacing: '1.2px', textTransform: 'uppercase', marginBottom: 24 }}>
               <Zap size={12} /> Bis zu 51% Rabatt
@@ -175,7 +198,7 @@ export default function Home() {
               </button>
             </div>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+          <div className='hero-stats' style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
             {[
               { num: '735+', label: 'Produkte', Icon: Bike },
               { num: '46', label: 'Top Marken', Icon: Star },
@@ -194,7 +217,7 @@ export default function Home() {
 
       {/* TRUST */}
       <section style={{ background: '#fff', borderBottom: '1px solid #e2e8f0' }}>
-        <div className="container" style={{ padding: '20px 24px', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }}>
+        <div className="container" className='trust-grid' style={{ padding: '20px 24px', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }}>
           {TRUST_ITEMS.map(({ Icon, title, desc }) => (
             <div key={title} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 0' }}>
               <div style={{ width: 40, height: 40, background: '#eff6ff', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
@@ -213,7 +236,7 @@ export default function Home() {
       <section style={{ background: '#f8fafc', padding: '48px 24px' }}>
         <div className="container">
           <h2 style={{ fontSize: 26, fontWeight: 800, color: '#0f172a', marginBottom: 24 }}>Kategorien</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(9, 1fr)', gap: 12 }}>
+          <div className='categories-grid' style={{ display: 'grid', gridTemplateColumns: 'repeat(9, 1fr)', gap: 12 }}>
             {CATEGORIES.map(({ label, akt, Icon }) => (
               <button key={akt} onClick={() => selectCategory(akt)} style={{
                 background: activeCategory === akt ? '#1a56db' : '#fff',
@@ -271,7 +294,7 @@ export default function Home() {
                 Alle Angebote <ChevronRight size={14} />
               </button>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 16 }}>
+            <div className='deals-grid' style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 16 }}>
               {dealsOfDay.map(p => <DealCard key={p.id} product={p} />)}
             </div>
           </div>
@@ -287,8 +310,8 @@ export default function Home() {
               <p style={{ color: '#64748b', fontSize: 14 }}>Entdecke unser gesamtes Sortiment</p>
             </div>
           )}
-          <div style={{ display: 'flex', gap: 36, alignItems: 'flex-start' }}>
-            <div style={{ position: 'sticky', top: 80, flexShrink: 0 }}>
+          <div className='catalog-layout' style={{ display: 'flex', gap: 36, alignItems: 'flex-start' }}>
+            <div className='filters-sidebar' style={{ position: 'sticky', top: 80, flexShrink: 0 }}>
               <Filters brands={ALL_BRANDS} aktivitaeten={ALL_AKTIVITAETEN} filters={filters}
                 onChange={f => { setFilters(f); setPage(1); setShowCatalog(true) }} />
               {(filters.brands.length > 0 || filters.aktivitaeten.length > 0 || activeCategory) && (
@@ -314,7 +337,7 @@ export default function Home() {
               </div>
 
               {loading ? (
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 18 }}>
+                <div className='products-grid' style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 18 }}>
                   {Array.from({ length: 12 }).map((_, i) => (
                     <div key={i} style={{ background: '#fff', borderRadius: 14, overflow: 'hidden', border: '1px solid #e2e8f0' }}>
                       <div style={{ aspectRatio: '1', background: 'linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
@@ -333,7 +356,7 @@ export default function Home() {
                   <p>Versuche andere Filter</p>
                 </div>
               ) : (
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 18 }}>
+                <div className='products-grid' style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 18 }}>
                   {paginated.map((p, i) => (
                     <>
                       <ProductCard key={p.id} product={p} />
@@ -441,7 +464,7 @@ function AnnouncementBar() {
 
   return (
     <div style={{ background: '#0f172a', padding: '10px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, flexWrap: 'wrap' }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+      <div className='announcement-timer' style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
         <span style={{ background: '#1a56db', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 4, letterSpacing: '0.8px' }}>FRÜHJAHR SALE</span>
         <span style={{ color: '#f8fafc', fontSize: 13 }}>Bis zu <strong style={{ color: '#60a5fa' }}>51% Rabatt</strong> auf alle Fahrräder</span>
       </div>
@@ -466,7 +489,7 @@ function AnnouncementBar() {
 
 function CatalogBanner({ onCategory }) {
   return (
-    <div style={{ gridColumn: '1 / -1', background: 'linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #1a56db 100%)', borderRadius: 16, padding: '28px 32px', display: 'grid', gridTemplateColumns: '1fr auto', gap: 24, alignItems: 'center', margin: '8px 0' }}>
+    <div className='catalog-banner-grid' style={{ gridColumn: '1 / -1', background: 'linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #1a56db 100%)', borderRadius: 16, padding: '28px 32px', display: 'grid', gridTemplateColumns: '1fr auto', gap: 24, alignItems: 'center', margin: '8px 0' }}>
       <div>
         <div style={{ display: 'inline-block', background: 'rgba(96,165,250,0.2)', border: '1px solid rgba(96,165,250,0.4)', color: '#93c5fd', fontSize: 11, fontWeight: 700, padding: '3px 10px', borderRadius: 20, marginBottom: 10, letterSpacing: '1px' }}>
           BIKEPACKING SEASON 2026
