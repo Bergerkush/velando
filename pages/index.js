@@ -15,6 +15,16 @@ import Footer from '../components/Footer'
 import { useCart } from '../lib/cart'
 import ReviewsSection from '../components/ReviewsSection'
 
+
+const FEATURED_PRODUCTS = [
+  { id: 371, name: 'Ghost ASKET EQ Gravel Bike 2026', brand: 'Ghost Bikes', price: 1599.0, new_price: 783.51, img: 'https://res.cloudinary.com/digemtlxu/image/upload/v1776079378/48ak1041-ghost-asket-eq-2026-olive-drab-midnight-black_2.jpg' },
+  { id: 381, name: 'Trek CHECKPOINT ALR 5 Gravel Bike 2026', brand: 'Trek Bikes', price: 1749.0, new_price: 857.01, img: 'https://res.cloudinary.com/digemtlxu/image/upload/v1776103255/checkpointalr5-26-35074-A-Primary.jpg' },
+  { id: 547, name: 'CUBE STEREO HYBRID ONE22 Pro 600 E-MTB', brand: 'CUBE Bikes', price: 3499.0, new_price: 1714.51, img: 'https://res.cloudinary.com/digemtlxu/image/upload/v1776080119/101140-1-1958579_l.jpg' },
+  { id: 307, name: 'Big Agnes Copper Spur UL3 Bikepacking Zelt', brand: 'Big Agnes', price: 780.0, new_price: 599.99, img: 'https://res.cloudinary.com/digemtlxu/image/upload/v1776102520/big-agnes-copper-spur-ul3-bikepacking-tent-2024-1.jpg' },
+  { id: 321, name: 'MSR Remote 3 Personen-Bergsteigerzelt', brand: 'MSR', price: 849.99, new_price: 654.99, img: 'https://res.cloudinary.com/digemtlxu/image/upload/v1776102496/msr-remote-3-13114-1.jpg' },
+  { id: 380, name: 'Garmin Tacx NEO 3M Direct Drive Heimtrainer', brand: 'Garmin', price: 1699.99, new_price: 1309.99, img: 'https://res.cloudinary.com/digemtlxu/image/upload/v1776102321/garmin-tacx-neo-3m-heimtrainer-t2875-1.jpg' },
+]
+
 const PER_PAGE = 24
 const TOTAL_CHUNKS = 8
 
@@ -83,12 +93,7 @@ export default function Home() {
     return [...s].sort()
   }, [products])
 
-  const dealsOfDay = useMemo(() => {
-    return [...products]
-      .filter(p => p.price > 0 && p.new_price > 0)
-      .sort((a, b) => (b.price - b.new_price) - (a.price - a.new_price))
-      .slice(0, 8)
-  }, [products])
+  const dealsOfDay = FEATURED_PRODUCTS
 
   const filtered = useMemo(() => {
     let list = products.filter(p => {
