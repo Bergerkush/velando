@@ -44,10 +44,15 @@ const FEATURED_REVIEWS = [
 
 export default function ReviewsSection() {
   return (
-    <section style={{ background: '#fff', padding: '56px 24px', borderTop: '1px solid #e2e8f0' }}>
+    <section style={{ background: '#fff', padding: '48px 16px', borderTop: '1px solid #e2e8f0' }}>
+      <style>{`
+        @media (max-width: 768px) {
+          .reviews-grid { grid-template-columns: 1fr !important; }
+          .reviews-header { flex-direction: column !important; align-items: flex-start !important; gap: 12px !important; }
+        }
+      `}</style>
       <div className="container">
-        {/* Header */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 32 }}>
+        <div className="reviews-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 28 }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6 }}>
               <div style={{ display: 'flex', gap: 2 }}>
@@ -58,24 +63,23 @@ export default function ReviewsSection() {
                 ))}
               </div>
               <span style={{ fontSize: 22, fontWeight: 900, color: '#0f172a' }}>4.9</span>
-              <span style={{ fontSize: 14, color: '#64748b' }}>· 10 Bewertungen</span>
+              <span style={{ fontSize: 14, color: '#64748b' }}>· 197 Bewertungen</span>
             </div>
-            <h2 style={{ fontSize: 26, fontWeight: 800, color: '#0f172a', margin: 0 }}>Was unsere Kunden sagen</h2>
+            <h2 style={{ fontSize: 24, fontWeight: 800, color: '#0f172a', margin: 0 }}>Was unsere Kunden sagen</h2>
           </div>
-          <Link href="/bewertungen" style={{ color: '#1a56db', fontSize: 14, fontWeight: 600, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 4 }}>
+          <Link href="/bewertungen" style={{ color: '#1a56db', fontSize: 14, fontWeight: 600, textDecoration: 'none', whiteSpace: 'nowrap' }}>
             Alle Bewertungen →
           </Link>
         </div>
 
-        {/* Reviews */}
-        <div className='reviews-grid' style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
+        <div className="reviews-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
           {FEATURED_REVIEWS.map(review => (
-            <div key={review.id} style={{ background: '#f8fafc', borderRadius: 14, padding: '20px', border: '1px solid #e2e8f0' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 14 }}>
+            <div key={review.id} style={{ background: '#f8fafc', borderRadius: 14, padding: '18px', border: '1px solid #e2e8f0' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
                 <img src={review.avatar} alt={review.name}
-                  style={{ width: 44, height: 44, borderRadius: '50%', objectFit: 'cover', border: '2px solid #fff' }} />
-                <div>
-                  <div style={{ fontWeight: 700, fontSize: 14, color: '#0f172a' }}>{review.name}</div>
+                  style={{ width: 42, height: 42, borderRadius: '50%', objectFit: 'cover', border: '2px solid #fff', flexShrink: 0 }} />
+                <div style={{ minWidth: 0 }}>
+                  <div style={{ fontWeight: 700, fontSize: 14, color: '#0f172a', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{review.name}</div>
                   <div style={{ fontSize: 12, color: '#94a3b8' }}>{review.city} · {review.date}</div>
                 </div>
               </div>
@@ -87,10 +91,9 @@ export default function ReviewsSection() {
           ))}
         </div>
 
-        {/* Trust bar */}
-        <div style={{ marginTop: 28, textAlign: 'center' }}>
+        <div style={{ marginTop: 24, textAlign: 'center' }}>
           <Link href="/bewertungen" style={{ fontSize: 13, color: '#64748b', textDecoration: 'none' }}>
-            ✓ Alle Bewertungen von verifizierten Käufern · <span style={{ color: '#1a56db' }}>Alle 10 Bewertungen ansehen</span>
+            ✓ Alle Bewertungen von verifizierten Käufern · <span style={{ color: '#1a56db' }}>Alle 197 Bewertungen ansehen</span>
           </Link>
         </div>
       </div>
