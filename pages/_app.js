@@ -13,6 +13,8 @@ export default function App({ Component, pageProps }) {
         <link rel="shortcut icon" href="/favicon.ico" />
         <meta name="theme-color" content="#0f172a" />
       </Head>
+
+      {/* Consent Mode — первым, до любых тегов */}
       <Script id="ga-consent" strategy="beforeInteractive">
         {`
           window.dataLayer = window.dataLayer || [];
@@ -20,6 +22,8 @@ export default function App({ Component, pageProps }) {
           gtag('consent', 'default', {
             analytics_storage: 'denied',
             ad_storage: 'denied',
+            ad_user_data: 'denied',
+            ad_personalization: 'denied',
             wait_for_update: 500
           });
           try {
@@ -27,24 +31,32 @@ export default function App({ Component, pageProps }) {
             if (consent === 'all') {
               gtag('consent', 'update', {
                 analytics_storage: 'granted',
-                ad_storage: 'granted'
+                ad_storage: 'granted',
+                ad_user_data: 'granted',
+                ad_personalization: 'granted'
               });
             }
           } catch(e) {}
         `}
       </Script>
+
+      {/* Один gtag.js для обоих аккаунтов */}
       <Script
-        src="https://www.googletagmanager.com/gtag/js?id=G-BECPWQMY4D"
+        src="https://www.googletagmanager.com/gtag/js?id=AW-18130689976"
         strategy="afterInteractive"
       />
-      <Script id="google-analytics" strategy="afterInteractive">
+
+      {/* GA4 + Google Ads */}
+      <Script id="google-tags" strategy="afterInteractive">
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
           gtag('config', 'G-BECPWQMY4D');
+          gtag('config', 'AW-18130689976');
         `}
       </Script>
+
       <Component {...pageProps} />
       <CookieBanner />
     </CartProvider>
