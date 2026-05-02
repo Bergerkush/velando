@@ -17,12 +17,12 @@ import ReviewsSection from '../components/ReviewsSection'
 
 
 const FEATURED_PRODUCTS = [
-  { id: 700, name: 'Trek CHECKMATE SLR 7 AXS - Carbon Gravel Bike - 2026 - Era W', brand: 'Trek Bikes', price: 6379.0, new_price: 3125.71, img: 'https://res.cloudinary.com/digemtlxu/image/upload/v1776103313/checkmateslr7axs-26-58668-c-primary-1956474.jpg' },
-  { id: 691, name: 'CUBE STEREO HYBRID ONE44 HPC TM 800 - Carbon E-Mountainbike ', brand: 'CUBE Bikes', price: 5999.0, new_price: 2939.51, img: 'https://res.cloudinary.com/digemtlxu/image/upload/v1776102450/102700-1-1934817.jpg' },
-  { id: 682, name: 'CUBE STEREO HYBRID ONE44 HPC SLX EVO 800 - Carbon E-Mountain', brand: 'CUBE Bikes', price: 5699.0, new_price: 2792.51, img: 'https://res.cloudinary.com/digemtlxu/image/upload/v1776080595/102610-1-1934875_o6lmnc.jpg' },
-  { id: 664, name: 'CUBE AMS HYBRID ONE44 C:68X SUPER TM 400X - 29" Carbon E-Mou', brand: 'CUBE Bikes', price: 5099.0, new_price: 2498.51, img: 'https://res.cloudinary.com/digemtlxu/image/upload/v1776102481/ams-hybrid-one44-c-68x-super-tm-400x-29-dustyolive-gold-1-1723500.jpg' },
-  { id: 634, name: 'CUBE STEREO HYBRID ONE44 EXC 800 - E-Mountainbike - 2026 - 2', brand: 'CUBE Bikes', price: 4699.0, new_price: 2302.51, img: 'https://res.cloudinary.com/digemtlxu/image/upload/v1776080496/102300-1-1934703_xjatkz.jpg' },
-  { id: 547, name: 'CUBE STEREO HYBRID ONE22 Pro 600 - E-Mountainbike - 2026 - 2', brand: 'CUBE Bikes', price: 3499.0, new_price: 1714.51, img: 'https://res.cloudinary.com/digemtlxu/image/upload/v1776080119/101140-1-1958579_ldddxh.jpg' },
+  { id: 700, name: 'Trek CHECKMATE SLR 7 AXS - Carbon Gravel Bike 2026', brand: 'Trek Bikes', price: 6379.0, new_price: 3125.71, img: 'https://res.cloudinary.com/digemtlxu/image/upload/v1776103313/checkmateslr7axs-26-58668-c-primary-1956474.jpg' },
+  { id: 691, name: 'CUBE STEREO HYBRID ONE44 HPC TM 800 - Carbon E-MTB', brand: 'CUBE Bikes', price: 5999.0, new_price: 2939.51, img: 'https://res.cloudinary.com/digemtlxu/image/upload/v1776102450/102700-1-1934817.jpg' },
+  { id: 682, name: 'CUBE STEREO HYBRID ONE44 HPC SLX EVO 800 - Carbon E-MTB', brand: 'CUBE Bikes', price: 5699.0, new_price: 2792.51, img: 'https://res.cloudinary.com/digemtlxu/image/upload/v1776080595/102610-1-1934875_o6lmnc.jpg' },
+  { id: 664, name: 'CUBE AMS HYBRID ONE44 C:68X SUPER TM 400X 29 Carbon', brand: 'CUBE Bikes', price: 5099.0, new_price: 2498.51, img: 'https://res.cloudinary.com/digemtlxu/image/upload/v1776102481/ams-hybrid-one44-c-68x-super-tm-400x-29-dustyolive-gold-1-1723500.jpg' },
+  { id: 634, name: 'CUBE STEREO HYBRID ONE44 EXC 800 - E-Mountainbike 2026', brand: 'CUBE Bikes', price: 4699.0, new_price: 2302.51, img: 'https://res.cloudinary.com/digemtlxu/image/upload/v1776080496/102300-1-1934703_xjatkz.jpg' },
+  { id: 547, name: 'CUBE STEREO HYBRID ONE22 Pro 600 E-MTB', brand: 'CUBE Bikes', price: 3499.0, new_price: 1714.51, img: 'https://res.cloudinary.com/digemtlxu/image/upload/v1776080119/101140-1-1958579_l.jpg' },
 ]
 
 const PER_PAGE = 24
@@ -158,7 +158,7 @@ export default function Home() {
           .categories-grid { grid-template-columns: repeat(5, 1fr) !important; gap: 8px !important; }
           .trust-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 8px !important; }
           .catalog-layout { flex-direction: column !important; }
-          .filters-sidebar { display: none !important; }
+          .filters-sidebar { position: static !important; width: auto !important; }
           .products-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
           .reviews-grid { grid-template-columns: 1fr !important; }
           .hero-grid { grid-template-columns: 1fr !important; }
