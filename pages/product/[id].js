@@ -42,7 +42,7 @@ export default function ProductPage() {
   const imgs = product.imgs?.length > 0 ? product.imgs : product.img ? [product.img] : []
   const discount = product.price > 0 ? Math.round((1 - product.new_price / product.price) * 100) : 0
   const savings = product.price - product.new_price
-  const fallback = `https://via.placeholder.com/500x500/eff6ff/1a56db?text=${encodeURIComponent(product.brand || '')}`
+  const fallback = `data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500'><rect width='500' height='500' fill='%23eff6ff'/><text x='250' y='280' text-anchor='middle' font-size='80' font-weight='700' fill='%231a56db' font-family='sans-serif'>${(product.brand||'V').slice(0,2).toUpperCase()}</text></svg>`
   const hasSizes = product.sizes && Object.keys(product.sizes).length > 0
 
   function handleAdd() {
