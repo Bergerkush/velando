@@ -86,6 +86,11 @@ export default function ProductPage() {
             gap: 20px;
             margin-bottom: 40px;
           }
+          .product-layout > div:first-child {
+            max-width: 480px;
+            margin: 0 auto;
+            width: 100%;
+          }
           .tech-table-row {
             grid-template-columns: 1fr 1fr;
           }
