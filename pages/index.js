@@ -399,7 +399,7 @@ export default function Home() {
 function DealCard({ product }) {
   const { addItem } = useCart()
   const discount = product.price > 0 ? Math.round((1 - product.new_price / product.price) * 100) : 0
-  const fallback = `https://via.placeholder.com/300x300/eff6ff/1a56db?text=${encodeURIComponent(product.brand || '')}`
+  const fallback = `data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><rect width='300' height='300' fill='%23eff6ff'/><text x='150' y='165' text-anchor='middle' font-size='48' font-weight='700' fill='%231a56db' font-family='sans-serif'>${(product.brand||'V').slice(0,2).toUpperCase()}</text></svg>`
   return (
     <Link href={`/product/${product.id}`} style={{ textDecoration: 'none' }}>
       <div style={{ background: '#fff', borderRadius: 14, overflow: 'hidden', border: '1px solid #e2e8f0', transition: 'transform 0.2s, box-shadow 0.2s', cursor: 'pointer' }}
