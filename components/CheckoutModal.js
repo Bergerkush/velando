@@ -25,11 +25,25 @@ export default function CheckoutModal({ open, onClose }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ form, items, total: totalPrice })
       })
-      if (res.ok) { setSuccess(true); clearCart() }
-      else setError('Fehler beim Senden. Bitte versuche es erneut.')
+      if (res.ok) {
+        // Google Ads conversion tracking — срабатывает при успешном заказе
+        if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+          window.gtag('event', 'conversion', {
+            send_to: 'AW-18130689976/eiEFCM-upqUcELi_scVD',
+            value: totalPrice,
+            currency: 'EUR',
+          })
+        }
+        setSuccess(true)
+        clearCart()
+      } else {
+        setError('Fehler beim Senden. Bitte versuche es erneut.')
+      }
     } catch (err) {
       setError('Verbindungsfehler. Bitte versuche es erneut.')
-    } finally { setSending(false) }
+    } finally {
+      setSending(false)
+    }
   }
 
   function handleClose() {
