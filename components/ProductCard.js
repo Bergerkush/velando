@@ -6,11 +6,32 @@ function formatPrice(p) {
   return new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(p)
 }
 
-// Добавляет Cloudinary трансформации: WebP, сжатие, resize
 function optimizeCloudinaryUrl(url, width = 400) {
   if (!url || !url.includes('res.cloudinary.com')) return url
-  // Вставляем трансформации после /upload/
   return url.replace('/upload/', `/upload/f_auto,q_auto,w_${width},c_limit/`)
+}
+
+// Inline SVG заглушка — никаких внешних запросов
+function FallbackImage({ brand }) {
+  const label = (brand || 'V').slice(0, 2).toUpperCase()
+  return (
+    <div style={{
+      width: '100%',
+      height: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      background: '#eff6ff',
+      gap: 8,
+    }}>
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+        <rect width="48" height="48" rx="12" fill="#dbeafe"/>
+        <text x="24" y="30" textAnchor="middle" fontSize="18" fontWeight="700" fill="#1a56db" fontFamily="sans-serif">{label}</text>
+      </svg>
+      <span style={{ fontSize: 11, color: '#93c5fd', fontWeight: 600 }}>Kein Bild</span>
+    </div>
+  )
 }
 
 export default function ProductCard({ product }) {
@@ -22,11 +43,9 @@ export default function ProductCard({ product }) {
     ? Math.round((1 - product.new_price / product.price) * 100)
     : 0
 
-  const fallback = `https://via.placeholder.com/300x300/eff6ff/1a56db?text=${encodeURIComponent(product.brand || 'Velando')}`
-
   const imgSrc = !imgErr && product.img
     ? optimizeCloudinaryUrl(product.img, 400)
-    : fallback
+    : null
 
   function handleAdd(e) {
     e.preventDefault()
@@ -64,21 +83,25 @@ export default function ProductCard({ product }) {
           background: '#f8fafc',
           overflow: 'hidden'
         }}>
-          <img
-            src={imgSrc}
-            alt={product.name}
-            loading="lazy"
-            width={400}
-            height={400}
-            onError={() => setImgErr(true)}
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'contain',
-              padding: 12,
-              transition: 'transform 0.3s'
-            }}
-          />
+          {imgSrc ? (
+            <img
+              src={imgSrc}
+              alt={product.name}
+              loading="lazy"
+              width={400}
+              height={400}
+              onError={() => setImgErr(true)}
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'contain',
+                padding: 12,
+                transition: 'transform 0.3s'
+              }}
+            />
+          ) : (
+            <FallbackImage brand={product.brand} />
+          )}
           {discount > 0 && (
             <span style={{
               position: 'absolute',
