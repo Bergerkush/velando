@@ -116,13 +116,17 @@ export default function ProductPage() {
               overflow: 'hidden',
               aspectRatio: '1',
               marginBottom: 12,
-              border: '1px solid #e2e8f0'
+              border: '1px solid #e2e8f0',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: 24,
             }}>
               <img
                 src={mainImg || fallback}
                 alt={product.name}
                 onError={e => e.target.src = fallback}
-                style={{ width: '100%', height: '100%', objectFit: 'contain', padding: 24 }}
+                style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }}
               />
             </div>
 
@@ -181,7 +185,7 @@ export default function ProductPage() {
                   ))}
                 </div>
                 <span style={{ fontSize: 14, fontWeight: 700, color: '#0f172a' }}>4.9</span>
-                <span style={{ fontSize: 14, color: '#64748b' }}>{Math.floor(50 + (product.id % 200))} Bewertungen</span>
+                <span style={{ fontSize: 14, color: '#64748b' }}>197 Bewertungen</span>
               </div>
             </Link>
 
