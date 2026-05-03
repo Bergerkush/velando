@@ -158,7 +158,7 @@ export default function Home() {
           .categories-grid { grid-template-columns: repeat(5, 1fr) !important; gap: 8px !important; }
           .trust-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 8px !important; }
           .catalog-layout { flex-direction: column !important; }
-          .filters-sidebar { position: static !important; width: auto !important; top: auto !important; }
+          .filters-sidebar { display: contents !important; }
           .products-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
           .reviews-grid { grid-template-columns: 1fr !important; }
           .hero-grid { grid-template-columns: 1fr !important; }
