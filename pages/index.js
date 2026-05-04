@@ -179,8 +179,9 @@ export default function Home() {
       <Header onSearch={v => { setSearch(v); setShowCatalog(true) }} searchValue={search} />
 
       {/* HERO */}
-      <section style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #1a56db 100%)', padding: '80px 24px', position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle at 70% 50%, rgba(96,165,250,0.1) 0%, transparent 60%)' }} />
+      <section style={{ background: '#0f172a', padding: '80px 24px', position: 'relative', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'url(https://res.cloudinary.com/digemtlxu/image/upload/f_auto,q_auto,w_1400/v1777901342/velando24_kor39u.png)', backgroundSize: 'cover', backgroundPosition: 'center' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(15,23,42,0.85) 0%, rgba(30,58,95,0.75) 50%, rgba(26,86,219,0.7) 100%)' }} />
         <div className="container" className='hero-grid' style={{ position: 'relative', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center' }}>
           <div>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'rgba(59,130,246,0.2)', border: '1px solid rgba(59,130,246,0.5)', color: '#93c5fd', padding: '5px 16px', borderRadius: 20, fontSize: 12, fontWeight: 700, letterSpacing: '1.2px', textTransform: 'uppercase', marginBottom: 24 }}>
