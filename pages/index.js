@@ -180,7 +180,7 @@ export default function Home() {
 
       {/* HERO */}
       <section style={{ background: '#0f172a', padding: '80px 24px', position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'url(https://res.cloudinary.com/digemtlxu/image/upload/f_auto,q_auto,w_1400/v1777901342/velando24_kor39u.png)', backgroundSize: 'cover', backgroundPosition: 'center' }} />
+        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'url(https://res.cloudinary.com/digemtlxu/image/upload/f_auto,q_60,w_800/v1777901342/velando24_kor39u.png)', backgroundSize: 'cover', backgroundPosition: 'center' }} />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(15,23,42,0.85) 0%, rgba(30,58,95,0.75) 50%, rgba(26,86,219,0.7) 100%)' }} />
         <div className="container" className='hero-grid' style={{ position: 'relative', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center' }}>
           <div>
