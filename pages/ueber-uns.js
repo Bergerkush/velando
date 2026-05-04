@@ -13,20 +13,31 @@ const IconReturn = () => <svg width="32" height="32" viewBox="0 0 24 24" fill="n
 const IconLock = () => <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1a56db" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
 const IconCheck = () => <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1a56db" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
 const IconChat = () => <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1a56db" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+const IconWrench = () => <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1a56db" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
 
 export default function UeberUns() {
   return (
     <>
       <Head>
         <title>Über uns — Velando</title>
-        <meta name="description" content="Velando — dein Partner für Premium Outdoor & Radsport Ausrüstung." />
+        <meta name="description" content="Velando — dein Partner für Premium Outdoor & Radsport Ausrüstung. Fahrrad-Werkstatt in Starnberg." />
       </Head>
+      <style>{`
+        @media (max-width: 768px) {
+          .about-grid { grid-template-columns: 1fr !important; }
+          .stats-grid { grid-template-columns: repeat(2, 1fr) !important; }
+          .values-grid { grid-template-columns: 1fr !important; }
+          .workshop-grid { grid-template-columns: 1fr !important; }
+          .workshop-img { height: 300px !important; }
+        }
+      `}</style>
       <Header />
       <main>
-        {/* Hero */}
-        <section style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e3a5f 60%, #1a56db 100%)', padding: '96px 24px', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
-          <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle at 70% 50%, rgba(96,165,250,0.08) 0%, transparent 60%)' }} />
-          <div style={{ maxWidth: 700, margin: '0 auto', position: 'relative' }}>
+        {/* Hero with store photo */}
+        <section style={{ position: 'relative', overflow: 'hidden', padding: '96px 24px' }}>
+          <div style={{ position: 'absolute', inset: 0, backgroundImage: 'url(https://res.cloudinary.com/digemtlxu/image/upload/f_auto,q_auto,w_1400/v1777901342/velando24_kor39u.png)', backgroundSize: 'cover', backgroundPosition: 'center' }} />
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(15,23,42,0.88) 0%, rgba(30,58,95,0.8) 50%, rgba(26,86,219,0.75) 100%)' }} />
+          <div style={{ maxWidth: 700, margin: '0 auto', position: 'relative', textAlign: 'center' }}>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'rgba(59,130,246,0.15)', border: '1px solid rgba(59,130,246,0.4)', color: '#93c5fd', padding: '5px 16px', borderRadius: 20, fontSize: 12, fontWeight: 700, letterSpacing: '1.2px', textTransform: 'uppercase', marginBottom: 24 }}>
               Unsere Geschichte
             </div>
@@ -42,7 +53,7 @@ export default function UeberUns() {
         {/* Stats */}
         <section style={{ background: '#fff', borderBottom: '1px solid #e2e8f0' }}>
           <div className="container" style={{ padding: '0 24px' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)' }}>
+            <div className="stats-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)' }}>
               {[
                 { num: '2024', label: 'Gegründet' },
                 { num: '735+', label: 'Produkte' },
@@ -61,7 +72,7 @@ export default function UeberUns() {
         {/* Mission */}
         <section style={{ background: '#f8fafc', padding: '80px 24px' }}>
           <div className="container">
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center' }}>
+            <div className="about-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center' }}>
               <div>
                 <div style={{ fontSize: 12, fontWeight: 700, color: '#1a56db', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: 16 }}>Unsere Mission</div>
                 <h2 style={{ fontSize: 36, fontWeight: 900, color: '#0f172a', marginBottom: 20, lineHeight: 1.15 }}>Sport für alle zugänglich machen</h2>
@@ -93,23 +104,72 @@ export default function UeberUns() {
           </div>
         </section>
 
+        {/* Werkstatt */}
+        <section style={{ background: '#fff', padding: '80px 24px', borderTop: '1px solid #e2e8f0' }}>
+          <div className="container">
+            <div className="workshop-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }}>
+              <div className="workshop-img" style={{
+                borderRadius: 20,
+                overflow: 'hidden',
+                height: 460,
+                backgroundImage: 'url(https://res.cloudinary.com/digemtlxu/image/upload/f_auto,q_auto,w_800/v1777901634/velando24_2_bxrgmj.png)',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+              }} />
+              <div>
+                <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#eff6ff', padding: '6px 14px', borderRadius: 20, marginBottom: 20 }}>
+                  <IconWrench />
+                  <span style={{ fontSize: 12, fontWeight: 700, color: '#1a56db', textTransform: 'uppercase', letterSpacing: '1px' }}>Velando Werkstatt</span>
+                </div>
+                <h2 style={{ fontSize: 36, fontWeight: 900, color: '#0f172a', marginBottom: 20, lineHeight: 1.15 }}>Professionelle Fahrrad-Werkstatt</h2>
+                <p style={{ color: '#64748b', lineHeight: 1.8, fontSize: 16, marginBottom: 28 }}>
+                  In unserer Werkstatt in Starnberg kümmern sich erfahrene Mechaniker um dein Fahrrad. Ob Inspektion, Reparatur oder individueller Aufbau — wir sorgen dafür, dass dein Bike perfekt läuft.
+                </p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 16, marginBottom: 32 }}>
+                  {[
+                    { title: 'Inspektion & Wartung', desc: 'Komplette Durchsicht, Bremsen, Schaltung, Lager — alles wird geprüft und eingestellt.' },
+                    { title: 'Reparatur & Austausch', desc: 'Platten, defekte Schaltungen, Laufräder — schnell und zuverlässig repariert.' },
+                    { title: 'E-Bike Service', desc: 'Software-Updates, Akku-Diagnose, Motor-Service für alle gängigen Systeme.' },
+                    { title: 'Bike Fitting & Aufbau', desc: 'Individuelle Anpassung und Neuaufbau nach deinen Wünschen.' },
+                  ].map(({ title, desc }) => (
+                    <div key={title} style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
+                      <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#1a56db', marginTop: 8, flexShrink: 0 }} />
+                      <div>
+                        <div style={{ fontSize: 15, fontWeight: 700, color: '#0f172a', marginBottom: 4 }}>{title}</div>
+                        <div style={{ fontSize: 14, color: '#64748b', lineHeight: 1.6 }}>{desc}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div style={{ background: '#f0fdf4', borderRadius: 12, padding: '16px 20px', display: 'flex', alignItems: 'center', gap: 12 }}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16a34a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  <div>
+                    <div style={{ fontSize: 14, fontWeight: 700, color: '#0f172a' }}>Velando Werkstatt Starnberg</div>
+                    <div style={{ fontSize: 13, color: '#64748b' }}>Gautinger Str. 3, 82319 Starnberg</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Values */}
-        <section style={{ background: '#fff', padding: '80px 24px' }}>
+        <section style={{ background: '#f8fafc', padding: '80px 24px', borderTop: '1px solid #e2e8f0' }}>
           <div className="container">
             <div style={{ textAlign: 'center', marginBottom: 48 }}>
               <div style={{ fontSize: 12, fontWeight: 700, color: '#1a56db', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: 12 }}>Was uns auszeichnet</div>
               <h2 style={{ fontSize: 36, fontWeight: 900, color: '#0f172a', margin: 0 }}>Unsere Versprechen an dich</h2>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
+            <div className="values-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
               {[
                 { Icon: IconTag, title: 'Faire Preise', desc: 'Bis zu 51% unter dem Originalpreis — wir arbeiten direkt mit Distributoren zusammen um dir die besten Preise zu bieten.' },
                 { Icon: IconTruck, title: 'Kostenloser Versand', desc: 'Jede Bestellung wird kostenlos innerhalb Deutschlands geliefert. Kein Mindestbestellwert, keine versteckten Kosten.' },
                 { Icon: IconReturn, title: '30 Tage Rückgabe', desc: 'Du bist nicht zufrieden? Kein Problem — 30 Tage Rückgaberecht ohne Fragen. Deine Zufriedenheit ist unser Ziel.' },
                 { Icon: IconLock, title: 'Sichere Zahlung', desc: 'Alle Zahlungen sind SSL-verschlüsselt. Wir akzeptieren PayPal und Banküberweisung für maximale Sicherheit.' },
                 { Icon: IconCheck, title: 'Geprüfte Qualität', desc: 'Nur Originalprodukte von autorisierten Händlern. Jedes Produkt wird vor dem Versand geprüft.' },
-                { Icon: IconChat, title: 'Persönlicher Service', desc: 'Fragen? Unser Team antwortet schnell und kompetent. Erreichbar unter info@velando24.de.' },
+                { Icon: IconWrench, title: 'Eigene Werkstatt', desc: 'Professionelle Fahrrad-Werkstatt in Starnberg. Inspektion, Reparatur, E-Bike Service und individueller Aufbau.' },
               ].map(({ Icon, title, desc }) => (
-                <div key={title} style={{ background: '#f8fafc', borderRadius: 14, padding: '28px 24px', border: '1px solid #e2e8f0' }}>
+                <div key={title} style={{ background: '#fff', borderRadius: 14, padding: '28px 24px', border: '1px solid #e2e8f0' }}>
                   <div style={{ marginBottom: 14, width: 48, height: 48, background: '#eff6ff', borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <Icon />
                   </div>
@@ -122,7 +182,7 @@ export default function UeberUns() {
         </section>
 
         {/* Brands */}
-        <section style={{ background: '#f8fafc', padding: '80px 24px', borderTop: '1px solid #e2e8f0' }}>
+        <section style={{ background: '#fff', padding: '80px 24px', borderTop: '1px solid #e2e8f0' }}>
           <div className="container">
             <div style={{ textAlign: 'center', marginBottom: 40 }}>
               <div style={{ fontSize: 12, fontWeight: 700, color: '#1a56db', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: 12 }}>Unsere Partner</div>
@@ -131,7 +191,7 @@ export default function UeberUns() {
             </div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, justifyContent: 'center' }}>
               {['CUBE Bikes','Garmin','Suunto','Trek Bikes','SCOTT Bikes','Cannondale Bikes','Osprey','Polar','Big Agnes','MSR','Therm-a-Rest','Katadyn'].map(brand => (
-                <div key={brand} style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 10, padding: '10px 20px', fontSize: 14, fontWeight: 600, color: '#334155' }}>
+                <div key={brand} style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 10, padding: '10px 20px', fontSize: 14, fontWeight: 600, color: '#334155' }}>
                   {brand.replace(' Bikes', '')}
                 </div>
               ))}
