@@ -29,7 +29,7 @@ export default function CheckoutModal({ open, onClose }) {
         // Google Ads conversion tracking — срабатывает при успешном заказе
         if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
           window.gtag('event', 'conversion', {
-            send_to: 'AW-17988028933/purchase',
+            send_to: 'AW-17988028933/vDwSCLKIvRkcEIWUroFD',
             value: totalPrice,
             currency: 'EUR',
           })
