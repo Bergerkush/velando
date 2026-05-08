@@ -42,7 +42,7 @@ export default function App({ Component, pageProps }) {
 
       {/* Один gtag.js для обоих аккаунтов */}
       <Script
-        src="https://www.googletagmanager.com/gtag/js?id=AW-18130689976"
+        src="https://www.googletagmanager.com/gtag/js?id=AW-17988028933"
         strategy="afterInteractive"
       />
 
@@ -53,7 +53,7 @@ export default function App({ Component, pageProps }) {
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
           gtag('config', 'G-BECPWQMY4D');
-          gtag('config', 'AW-18130689976');
+          gtag('config', 'AW-17988028933');
         `}
       </Script>
 
