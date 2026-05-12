@@ -24,9 +24,9 @@ export default function Widerruf() {
           <p>Um Ihr Widerrufsrecht auszuüben, müssen Sie uns</p>
           <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 8, padding: '16px 20px', margin: '12px 0' }}>
             <p style={{ margin: 0 }}>
-              <strong>Velando GmbH</strong><br />
-              Musterstraße 1<br />
-              12345 Berlin<br />
+              <strong>Stefan Eberle (Einzelunternehmer)</strong><br />
+              Rotwandweg 1<br />
+              82024 Taufkirchen<br />
               E-Mail: <a href="mailto:info@velando24.de" style={{ color: '#1a56db' }}>info@velando24.de</a>
             </p>
           </div>
@@ -47,7 +47,7 @@ export default function Widerruf() {
 
         <Section title="Muster-Widerrufsformular">
           <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 8, padding: '20px 24px', fontSize: 14, lineHeight: 1.8 }}>
-            <p><strong>An: Velando GmbH, info@velando24.de</strong></p>
+            <p><strong>An: Stefan Eberle, info@velando24.de</strong></p>
             <p>Hiermit widerrufe(n) ich/wir (*) den von mir/uns (*) abgeschlossenen Vertrag über den Kauf der folgenden Waren (*):</p>
             <p>Bestellt am (*)/erhalten am (*):</p>
             <p>Name des/der Verbraucher(s):</p>

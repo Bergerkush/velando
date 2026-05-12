@@ -11,7 +11,7 @@ export default function Datenschutz() {
         <h1 style={{ fontSize: 36, fontWeight: 800, color: '#0f172a', marginBottom: 32 }}>Datenschutzerklärung</h1>
         <div style={{ fontSize: 15, lineHeight: 1.8, color: '#334155' }}>
           <h2 style={{ fontSize: 20, fontWeight: 700, color: '#0f172a', marginBottom: 12 }}>1. Verantwortlicher</h2>
-          <p>Velando GmbH, Musterstraße 1, 12345 Berlin. E-Mail: datenschutz@velando.de</p>
+          <p>Stefan Eberle (Einzelunternehmer), Rotwandweg 1, 82024 Taufkirchen. E-Mail: info@velando24.de</p>
           <br />
           <h2 style={{ fontSize: 20, fontWeight: 700, color: '#0f172a', marginBottom: 12 }}>2. Erhobene Daten</h2>
           <p>Wir erheben nur die Daten, die für die Vertragserfüllung notwendig sind (Name, Adresse, E-Mail, Telefon).</p>
